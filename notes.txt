@@ -1,0 +1,1 @@
+the only difference between this and the cookie method is that the cookie method stores the cookie in the server
