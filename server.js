@@ -20,7 +20,8 @@ app.get('/login ',(req,res)=>{
 })
 app.post('/login',(req,res)=>{
     const username =req.body.username
-    jwt.sign( )
-})
+    const user = {name: username }
+    jwt.sign(user,process.env.ACCESS_TOKEN_SECRET)
+}) 
 app.listen(8090)
 why 
