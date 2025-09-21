@@ -1,3 +1,4 @@
+require('dotenv').config()
 const express =require('express')
 const app =express()
 const jwt= require('jsonwebtoken')
@@ -12,7 +13,7 @@ const posts =[
         title:'post 2'
     }
 ]
-app.get('/posts',(req,res)=>{
+app.get('/posts',authenticateToken, (req,res)=>{
     res.json(posts)
 })
 app.get('/login ',(req,res)=>{
@@ -21,7 +22,14 @@ app.get('/login ',(req,res)=>{
 app.post('/login',(req,res)=>{
     const username =req.body.username
     const user = {name: username }
-    jwt.sign(user,process.env.ACCESS_TOKEN_SECRET)
+   const accessToken= jwt.sign(user,process.env.ACCESS_TOKEN_SECRET)
+   res.json({accessToken:accessToken })
 }) 
+function authenticateToken(req,res,nex){
+    const authHeader =req.headers['authorization']
+    const token =authHeader &&  authHeader.split('')[1]
+    if(token=null) return res.sendStatus(401 )
+ 
+
+}
 app.listen(8090)
-why 
