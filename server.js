@@ -2,17 +2,7 @@ require('dotenv').config()
 const express =require('express')
 const app =express()
 const jwt= require('jsonwebtoken')
-app.use(express.json()) 
-const posts =[
-    {
-        username:'kyle',
-        title:'post 1'
-    }, 
-    {
-        username:'kyle',
-        title:'post 2'
-    }
-]
+app.use(express.json())  
 app.get('/posts',authenticateToken, (req,res)=>{
     res.json(posts.filter(post=>post.username===req.user.name))
 })
@@ -34,4 +24,4 @@ function authenticateToken(req,res,nex){
         next( )
     })
 }
-app.listen(8090)
+app.listen(8000)
