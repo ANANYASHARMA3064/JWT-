@@ -29,9 +29,10 @@ app.post('/login',(req,res)=>{
    const accessToken= generateAccessToken(user)
    const refreshToken  = jwt.sign(user,process.env.REFRESH_TOKEN_SECRET)
    refreshTokens.push(refreshToken)
-   res.json({accessToken:accessToken })
+   res.json({accessToken:accessToken , refreshToken:refreshToken})
 }) 
 function generateAccessToken(user){
     return jwt.sign(user,process.env.ACCESS_TOKEN_SECRET,{expiresIn:'15s'})
 }
 app.listen(8000)
+ 
